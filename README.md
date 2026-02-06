@@ -31,19 +31,6 @@ Tech Stack
 
 ---
 
-Project Structure
-
-ai-blog-generator-app/
-│
-├── backend.py        # Agentic blog generation pipeline
-├── frontend.py       # Simple interface / runner script
-├── README.md
-├── .env              # API keys (not committed)
-├── .gitignore
-└── images/           # Generated diagrams
-
----
-
 Installation
 
 1. Clone the repository
