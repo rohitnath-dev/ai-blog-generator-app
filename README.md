@@ -1,48 +1,193 @@
-AI Blog Generator App
+# AI Blog Generation Engine (LangGraph Powered)
 
-An agentic AI-powered application that automatically plans, researches, and generates structured technical blog posts using a multi-step LLM workflow.
+An agentic, multi-stage AI system that **plans, researches, and generates high-quality technical blogs** using structured workflows.
 
-This project implements a modular blog-writing pipeline built with LangGraph and modern LLM tooling. It routes topics, optionally performs web research, orchestrates a writing plan, generates sectioned content, and enhances the final output with AI-generated diagrams.
-
----
-
-Features
-
-- Agentic blog-writing pipeline (Router → Research → Orchestrator → Workers → Reducer)
-- Schema-driven structured outputs using Pydantic
-- Optional web research via Tavily integration
-- Automatic multi-section blog generation
-- AI-assisted diagram planning and image placement
-- Modular graph architecture using LangGraph
-- Environment-based API configuration with ".env"
-- Markdown blog export with embedded images
+Unlike simple LLM wrappers, this project implements a **graph-based reasoning pipeline** with routing, research augmentation, and modular execution.
 
 ---
 
-Tech Stack
+## Why this project matters
+
+Most AI blog generators:
+- ❌ hallucinate
+- ❌ lack structure
+- ❌ produce generic content
+
+This system solves that using:
+
+- ✅ **Intent-aware routing**
+- ✅ **Optional real-time research (Tavily)**
+- ✅ **Structured planning (Pydantic schemas)**
+- ✅ **Multi-step generation pipeline**
+- ✅ **Evidence-backed writing**
+- ✅ **Image generation + placement**
+
+---
+
+## Architecture
+
+> **User Input**
+>       ↓
+> **Router** (Decides research vs direct)
+>       ↓
+> **Research** (Tavily API)
+>       ↓
+> **Planner** (Structured blog plan)
+>       ↓
+> **Workers** (Section-wise generation)
+>       ↓
+> **Reducer** (Merge + Images)
+>       ↓
+> **Final Blog Output**
+
+---
+
+## Core Components
+
+### 1. Router
+- Decides:
+  - closed_book vs open_book vs hybrid
+- Generates:
+  - search queries
+  - research need
+
+---
+
+### 2. Research Module
+- Uses Tavily API
+- Filters:
+  - relevant sources
+  - recent data
+- Produces structured `Evidence`
+
+---
+
+### 3. Planner (Orchestrator)
+- Creates full blog structure:
+  - title
+  - audience
+  - tone
+  - sections
+- Uses strict schema → no random outputs
+
+---
+
+### 4. Workers
+- Each worker:
+  - writes ONE section
+  - follows constraints
+  - uses evidence when required
+
+---
+
+### 5. Reducer + Image Engine
+- Merges all sections
+- Decides:
+  - where images are needed
+- Generates:
+  - diagrams using Gemini
+- Injects into markdown
+
+---
+
+## Features
+
+- Agentic workflow (LangGraph)
+- Schema-driven outputs (Pydantic)
+- Optional real-time research
+- Evidence-backed content
+- Modular node-based architecture
+- Automatic image generation
+- Export:
+  - Markdown
+  - ZIP (images + content)
+- Streaming execution support
+
+---
+
+## Tech Stack
 
 - Python
-- LangGraph (agent orchestration)
+- LangGraph
 - LangChain
 - OpenAI / Gemini APIs
 - Tavily Search API
 - Pydantic
-- python-dotenv
+- Streamlit (UI)
 
 ---
 
-Installation
+## Setup
 
-1. Clone the repository
+### 1. Clone repo
 
+```bash
 git clone https://github.com/your-username/ai-blog-generator-app.git
 cd ai-blog-generator-app
+```
+
+---
 
 2. Install dependencies
 
-pip install langgraph langchain langchain-openai langchain-community python-dotenv google-genai tavily-python
+pip install -r requirements.txt
 
-3. Create a ".env" file
+
+---
+
+3. Setup environment variables
+
+Create .env file:
+
+OPENAI_API_KEY=your_key_here
+GOOGLE_API_KEY=your_key_here
+TAVILY_API_KEY=your_key_here
+
+
+---
+
+4. Run app
+
+streamlit run frontend.py
+
+
+---
+
+Example Workflow
+
+Input:
+
+"Explain Retrieval Augmented Generation in detail"
+
+System will:
+
+1. Decide if research needed
+
+
+2. Fetch latest info
+
+
+3. Create structured plan
+
+
+4. Generate sections
+
+
+5. Add diagrams
+
+
+6. Output complete blog
+
+
+2. Install dependencies
+
+pip install -r requirements.txt
+
+---
+
+3. Setup environment variables
+
+Create .env file:
 
 OPENAI_API_KEY=your_key_here
 GOOGLE_API_KEY=your_key_here
@@ -50,49 +195,94 @@ TAVILY_API_KEY=your_key_here
 
 ---
 
-Usage
+4. Run app
 
-Run the backend script and invoke the app with a topic:
-
-result = app.invoke({
-    "topic": "Understanding Self Attention in Transformers",
-    "as_of": "2026-02-01",
-})
-
-The system will:
-
-1. Decide if research is required
-2. Collect external evidence (if needed)
-3. Create a structured blog plan
-4. Generate sections in parallel
-5. Merge content and add diagrams
-6. Export a final Markdown blog file
-
-Generated blogs and images are saved locally.
+streamlit run frontend.py
 
 ---
 
 Example Workflow
 
-Topic → Router
-      → (Research if needed)
-      → Orchestrator Plan
-      → Worker Sections
-      → Reducer + Images
-      → Final Blog Markdown
+Input:
+
+"Explain Retrieval Augmented Generation in detail"
+
+System will:
+
+1. Decide if research needed
+
+2. Fetch latest info
+
+3. Create structured plan
+
+4. Generate sections
+
+5. Add diagrams
+
+6. Output complete blog
+
+---
+
+Project Structure
+
+.
+├── backend.py        # LangGraph pipeline
+├── frontend.py       # Streamlit UI
+├── .env.example      # Env template
+├── requirements.txt
+└── README.md
+
+---
+
+Key Design Decisions
+
+1. Graph-based architecture
+
+Instead of linear pipelines -> flexible execution
+
+2. Structured outputs
+
+Prevents:
+* hallucination
+* randomness
+* inconsistency
+
+3. Research gating
+
+Not every query needs internet -> cost optimized
 
 ---
 
 Future Improvements
 
-- Web UI dashboard
-- Blog publishing integrations
-- Streaming generation
-- Custom style templates
-- Multi-language support
+[ ] Fine-tuned planning model
+[ ] RAG over custom knowledge base
+[ ] Multi-language blog generation
+[ ] SEO optimization module
+[ ] Feedback loop (RLHF-style)
+[ ] Evaluation pipeline (auto scoring)
 
 ---
 
-Conclusion
+Positioning
 
-This project demonstrates a scalable agentic architecture for automated technical blog generation. It showcases structured LLM workflows, modular orchestration, and practical integration of research and image generation into a unified pipeline.
+This is not just a blog generator.
+
+It is a:
+
+> Modular AI content generation engine with reasoning, retrieval, and orchestration
+
+---
+
+Contribution
+
+Feel free to:
+* Open issues
+* Suggest improvements
+* Extend modules
+
+---
+
+License
+
+MIT License
