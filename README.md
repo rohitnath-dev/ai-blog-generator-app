@@ -26,19 +26,21 @@ This system solves that using:
 
 ## Architecture
 
-> **User Input**
->       ↓
-> **Router** (Decides research vs direct)
->       ↓
-> **Research** (Tavily API)
->       ↓
-> **Planner** (Structured blog plan)
->       ↓
-> **Workers** (Section-wise generation)
->       ↓
-> **Reducer** (Merge + Images)
->       ↓
-> **Final Blog Output**
+```
+User Input
+    ↓
+Router (Decides research vs direct)
+    ↓
+Research (Tavily API)
+    ↓
+Planner (Structured blog plan)
+    ↓
+Workers (Section-wise generation)
+    ↓
+Reducer (Merge + Images)
+    ↓
+Final Blog Output
+```
 
 ---
 
@@ -126,145 +128,92 @@ git clone https://github.com/your-username/ai-blog-generator-app.git
 cd ai-blog-generator-app
 ```
 
----
+### 2. Install dependencies
 
-2. Install dependencies
-
+```bash
 pip install -r requirements.txt
+```
 
+### 3. Setup environment variables
 
----
+Create `.env` file:
 
-3. Setup environment variables
-
-Create .env file:
-
+```
 OPENAI_API_KEY=your_key_here
 GOOGLE_API_KEY=your_key_here
 TAVILY_API_KEY=your_key_here
+```
 
+### 4. Run app
 
----
-
-4. Run app
-
+```bash
 streamlit run frontend.py
-
+```
 
 ---
 
-Example Workflow
+## Example Workflow
 
-Input:
+**Input:**
+```
+Explain Retrieval Augmented Generation in detail
+```
 
-"Explain Retrieval Augmented Generation in detail"
-
-System will:
+**System will:**
 
 1. Decide if research needed
-
-
 2. Fetch latest info
-
-
 3. Create structured plan
-
-
 4. Generate sections
-
-
 5. Add diagrams
-
-
-6. Output complete blog
-
-
-2. Install dependencies
-
-pip install -r requirements.txt
-
----
-
-3. Setup environment variables
-
-Create .env file:
-
-OPENAI_API_KEY=your_key_here
-GOOGLE_API_KEY=your_key_here
-TAVILY_API_KEY=your_key_here
-
----
-
-4. Run app
-
-streamlit run frontend.py
-
----
-
-Example Workflow
-
-Input:
-
-"Explain Retrieval Augmented Generation in detail"
-
-System will:
-
-1. Decide if research needed
-
-2. Fetch latest info
-
-3. Create structured plan
-
-4. Generate sections
-
-5. Add diagrams
-
 6. Output complete blog
 
 ---
 
-Project Structure
+## Project Structure
 
+```
 .
 ├── backend.py        # LangGraph pipeline
 ├── frontend.py       # Streamlit UI
 ├── .env.example      # Env template
 ├── requirements.txt
 └── README.md
+```
 
 ---
 
-Key Design Decisions
+## Key Design Decisions
 
-1. Graph-based architecture
+### 1. Graph-based architecture
 
-Instead of linear pipelines -> flexible execution
+Instead of linear pipelines → flexible execution
 
-2. Structured outputs
+### 2. Structured outputs
 
 Prevents:
-* hallucination
-* randomness
-* inconsistency
+- hallucination
+- randomness
+- inconsistency
 
-3. Research gating
+### 3. Research gating
 
-Not every query needs internet -> cost optimized
-
----
-
-Future Improvements
-
-[ ] Fine-tuned planning model
-[ ] RAG over custom knowledge base
-[ ] Multi-language blog generation
-[ ] SEO optimization module
-[ ] Feedback loop (RLHF-style)
-[ ] Evaluation pipeline (auto scoring)
+Not every query needs internet → cost optimized
 
 ---
 
-Positioning
+## Future Improvements
+
+- [ ] Fine-tuned planning model
+- [ ] RAG over custom knowledge base
+- [ ] Multi-language blog generation
+- [ ] SEO optimization module
+- [ ] Feedback loop (RLHF-style)
+- [ ] Evaluation pipeline (auto scoring)
+
+---
+
+## Positioning
 
 This is not just a blog generator.
 
@@ -274,15 +223,15 @@ It is a:
 
 ---
 
-Contribution
+## Contribution
 
 Feel free to:
-* Open issues
-* Suggest improvements
-* Extend modules
+- Open issues
+- Suggest improvements
+- Extend modules
 
 ---
 
-License
+## License
 
 MIT License
